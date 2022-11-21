@@ -1,7 +1,7 @@
-# AnyKernel3 Ramdisk Mod Script
-# osm0sis @ xda-developers
+### AnyKernel3 Ramdisk Mod Script
+## osm0sis @ xda-developers
 
-## AnyKernel setup
+### AnyKernel setup
 # begin properties
 properties() { '
 kernel.string=ReSky Kernel
@@ -15,12 +15,22 @@ supported.versions=11 - 13
 supported.patchlevels=
 '; } # end properties
 
-# shell variables
+### AnyKernel install
+# begin attributes
+attributes() {
+set_perm_recursive 0 0 755 644 $ramdisk/*;
+set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
+} # end attributes
+
+
+## boot shell variables
 block=/dev/block/bootdevice/by-name/boot;
 is_slot_device=1;
 ramdisk_compression=auto;
 patch_vbmeta_flag=auto;
 
+# import functions/variables and setup patching - see for reference (DO NOT REMOVE)
+. tools/ak3-core.sh && attributes;
 
 ## AnyKernel methods (DO NOT CHANGE)
 # import patching functions/variables - see for reference
